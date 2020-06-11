@@ -26,7 +26,6 @@ public class User implements Serializable {
 	// dao -> sql state 변경
 
 	public User() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(String name, String message, int state) {
@@ -49,6 +48,7 @@ public class User implements Serializable {
 	public User(String nickname, String ip) { // 처음에 닉네임이랑 ip 가지고 접근했을때
 		this.nickname = nickname;
 		this.ip = ip;
+		System.out.println("ip받음" + ip);
 		// insert 를 이때 해줘야지
 		// dao 호출
 	}

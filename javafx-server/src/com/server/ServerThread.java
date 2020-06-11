@@ -14,6 +14,7 @@ public class ServerThread implements Runnable {
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	boolean exit = false;
+	String userip = "";
 
 	public ServerThread(Vector<User> user, ObjectInputStream ois, ObjectOutputStream oos) {
 		this.udata = user;
@@ -32,6 +33,13 @@ public class ServerThread implements Runnable {
 		this.userdata = user;
 	}
 
+	public ServerThread(Vector<User> user, String userip, ObjectInputStream ois2, ObjectOutputStream oos2) {
+		this.udata = user;
+		this.userip = userip;
+		this.ois = ois2;
+		this.oos = oos2;
+	}
+
 	// @Override
 	public void run() {
 		// udata = (User)ois.readObject();
@@ -44,7 +52,7 @@ public class ServerThread implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("udata || " + userdata.getNickname() + "||" + userdata.getIp());
+		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
 	}
 	
 	
