@@ -6,13 +6,14 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
+import com.biz.UserBiz;
 
 import com.vo.*;
 
 public class server {
 	// 데이터 자료형 - 우리는 vo 로 왓다갓다해
-	Vector<User> user;
-//	User user; // vo 객체 생성
+	public Vector<User> user;
+	User userdata; // vo 객체 생성
 	ServerSocket svSocket;
 	Socket soc;
 	ObjectInputStream ois;
@@ -42,8 +43,9 @@ public class server {
 
 				ois = new ObjectInputStream(soc.getInputStream());
 				oos = new ObjectOutputStream(soc.getOutputStream());
-
-				Thread t = new Thread(new ServerThread(user, ois, oos));
+				String userip = soc.getInetAddress().toString().replace("/", "");
+//				 userdata.setIp(soc.getInetAddress().toString());
+				Thread t = new Thread(new ServerThread(user, userip, ois, oos));
 //				Thread t = new Thread(new ServerThread(user));
 				t.start();
 			} catch (IOException e) {
@@ -56,7 +58,9 @@ public class server {
 		System.out.println("서버 서비스를 켭니다.");
 		server sv = new server();
 		sv.user = new Vector<User>(2, 1);
+		
 //		sv.user = new User();
 		sv.service();
+//		UserBiz.get_Nickname(userip);
 	}
 }
