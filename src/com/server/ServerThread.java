@@ -8,7 +8,7 @@ import java.util.Vector;
 import com.vo.*;
 
 public class ServerThread implements Runnable {
-	// µ¥ÀÌÅÍ ÀÚ·áÇü
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½ï¿½ï¿½
 	Vector<User> udata;
 	User userdata;
 	ObjectInputStream ois;
@@ -37,8 +37,7 @@ public class ServerThread implements Runnable {
 		// udata = (User)ois.readObject();
 		try {
 			userdata = (User) ois.readObject();
-//						udata = ;
-//						udata = (User)ois.readObject();
+//					
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

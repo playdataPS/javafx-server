@@ -10,9 +10,9 @@ import java.util.Vector;
 import com.vo.*;
 
 public class server {
-	// µ¥ÀÌÅÍ ÀÚ·áÇü - ¿ì¸®´Â vo ·Î ¿Ó´Ù°«´ÙÇØ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½ï¿½ï¿½ - ï¿½ì¸®ï¿½ï¿½ vo ï¿½ï¿½ ï¿½Ó´Ù°ï¿½ï¿½ï¿½ï¿½ï¿½
 	Vector<User> user;
-//	User user; // vo °´Ã¼ »ý¼º
+//	User user; // vo ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	ServerSocket svSocket;
 	Socket soc;
 	ObjectInputStream ois;
@@ -21,24 +21,24 @@ public class server {
 	public void service() {
 
 		try {
-			System.out.println("Á¢¼Ó ÁØºñ");
+			System.out.println("socket start");
 			svSocket = new ServerSocket(5555);
-			// ´Ð³×ÀÓÀÌ¶û ip Á¤º¸ ¹Þ¾Æ¿À´Â ºä È£Ãâ
+			// ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ ip ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½
 
-			// ÀÔ·ÂµÈ°ÍÀ» db ¿¡¼­ È®ÀÎ
+			// ï¿½Ô·ÂµÈ°ï¿½ï¿½ï¿½ db ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 //			user.getNickname();
 //			user.getIp();
 		} catch (IOException e) {
-			System.err.println("¼­ºñ½º ÁØºñÁß ¿¡·¯ ¹ß»ý");
+			e.printStackTrace();
 		}
 
 		while (true) {
 			try {
 				soc = svSocket.accept();
-				// ¿¬°á ¼ÒÄÏ °´Ã¼ »ý¼º
-				// ´Ð³×ÀÓÀÌ¶û ip ¸¦ È®ÀÎÇØ¼­ ³Ñ¾î°¡¾ßÇÏ´Âµ­
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+				// ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ ip ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ï¿½Ï´Âµï¿½
 
-				System.out.println(soc.getInetAddress() + "°¡ Á¢¼ÓÇß½À´Ï´Ù.");
+				System.out.println(soc.getInetAddress() + "ok");
 
 				ois = new ObjectInputStream(soc.getInputStream());
 				oos = new ObjectOutputStream(soc.getOutputStream());
@@ -47,15 +47,15 @@ public class server {
 //				Thread t = new Thread(new ServerThread(user));
 				t.start();
 			} catch (IOException e) {
-				System.err.println("¿¡·¯ ¹ß»ý");
+				e.printStackTrace();
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		System.out.println("¼­¹ö ¼­ºñ½º¸¦ ÄÕ´Ï´Ù.");
+		System.out.println("server ok");
 		server sv = new server();
-		sv.user = new Vector<User>(2, 1);
+		sv.user = new Vector<User>(5, 1);
 //		sv.user = new User();
 		sv.service();
 	}

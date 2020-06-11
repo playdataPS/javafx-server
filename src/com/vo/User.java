@@ -6,6 +6,10 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int no;
 	private String ip;
 	private String nickname;
@@ -17,9 +21,9 @@ public class User implements Serializable {
 	private ObjectInputStream ois;
 
 //	public static final int FIRST_CONNECTION = 1;
-	// dao -> sql È£Ãâ insert
+	// dao -> sql È£ï¿½ï¿½ insert
 //	public static final int DISCONNECTION = 2;
-	// dao -> sql state º¯°æ
+	// dao -> sql state ï¿½ï¿½ï¿½ï¿½
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -29,7 +33,7 @@ public class User implements Serializable {
 
 	}
 
-	// »ç¿ëÀÚ »ý¼º - ¸ðµç Á¤º¸¸¦ °¡Áø »ý¼ºÀÚ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public User(int no, String ip, String nickname, int score, boolean state) {
 		this.no = no;
 		this.ip = ip;
@@ -38,15 +42,15 @@ public class User implements Serializable {
 		this.state = state;
 	}
 
-	public User(String nickname, int state) { // »ç¿ëÀÚ ´Ð³×ÀÓ, »óÅÂ°ª °¡Áö´Â »ý¼ºÀÚ
+	public User(String nickname, int state) { // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //		this()
 	}
 
-	public User(String nickname, String ip) { // Ã³À½¿¡ ´Ð³×ÀÓÀÌ¶û ip °¡Áö°í Á¢±ÙÇßÀ»¶§
+	public User(String nickname, String ip) { // Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ ip ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		this.nickname = nickname;
 		this.ip = ip;
-		// insert ¸¦ ÀÌ¶§ ÇØÁà¾ßÁö
-		// dao È£Ãâ
+		// insert ï¿½ï¿½ ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// dao È£ï¿½ï¿½
 	}
 
 	public int getNo() {
