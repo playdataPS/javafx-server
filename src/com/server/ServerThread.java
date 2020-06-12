@@ -15,7 +15,7 @@ public class ServerThread implements Runnable {
 	ObjectOutputStream oos;
 	boolean exit = false;
 	String userip = "";
-
+	
 
 	public ServerThread(Vector<User> user, ObjectInputStream ois, ObjectOutputStream oos) {
 		this.udata = user;
@@ -51,7 +51,12 @@ public class ServerThread implements Runnable {
 				Status state = userdata.getStatus();
 				switch (state) {
 				case CONNECTED:
+					userdata.setOos(oos);
+					udata.add(userdata);
 					sendConnect();
+				default:
+					System.out.println("error");
+					break;
 
 				}
 
@@ -68,13 +73,10 @@ public class ServerThread implements Runnable {
 	// connect check & send to client
 	public void sendConnect() {
 		try {
-			userdata.getOos().writeObject(Status.CONNECTED);
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			userdata.getOos().writeObject(userdata);
 
 		} catch (IOException e) {
-			System.out.println("sendConnect ���� �����߻�");
+			e.printStackTrace();
 		}
 
 		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
