@@ -17,6 +17,8 @@ public class UserBiz {
 		return ret;
 	}
 
+	//
+
 	// 닉네임, ip 모두 입력받아서 일치하는지 확인
 	public static boolean getNickIp(User udata) {
 		Connection conn = getConnection();

@@ -42,29 +42,33 @@ public class ServerThread implements Runnable {
 
 	// @Override
 	public void run() {
-		// udata = (User)ois.readObject();
-		try {
-			userdata = (User) ois.readObject();
-//						udata = ;
-//						udata = (User)ois.readObject();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		while (!exit) {
+			try {
+				userdata = (User) ois.readObject();
+				// 사용자 접속시 상태값 받아오는 메소드
+				Status state = userdata.getStatus();
+				switch (state) {
+				case CONNECTED:
+					sendConnect();
+
+				}
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
 		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
 	}
-	
-	
-//	public void run() {
-//		// udata = (User)ois.readObject();
-////		try {
-////			userdata = 
-////		} catch (ClassNotFoundException e) {
-////			e.printStackTrace();
-////		} catch (IOException e) {
-////			e.printStackTrace();
-////		}
-//		System.out.println("udata || " + userdata.getNickname() + "||" + userdata.getIp());
-//	}
+
+	// connect check & send to client
+	public void sendConnect() {
+		try {
+			userdata.getOos().writeObject(Status.CONNECTED);
+		} catch (IOException e) {
+			System.out.println("sendConnect 에서 에러발생");
+		}
+	}
 }

@@ -13,6 +13,28 @@ public class UserDao implements UserSql {
 		this.conn = conn;
 	}
 
+	// IP 값 유무 확인
+	public String getIP(String ip) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		User userdata = null;
+		String userip = "";
+		try {
+			pstm = conn.prepareStatement(ch_ip);
+			pstm.setString(1, ip);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				userdata = new User(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		} finally {
+			Close(rs);
+			Close(pstm);
+		}
+		return userip;
+	}
+
 	// 닉네임이 값을 출력하는 메소드
 	public String getNickname(String ip) {
 		PreparedStatement pstm = null;
@@ -35,7 +57,7 @@ public class UserDao implements UserSql {
 		return ret;
 	}
 
-	//ip 로 닉네임 호출
+	// ip 로 닉네임 호출
 	public User getNickIP(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
