@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-////// Connection & Close & Commit & rollback  4媛쒕쭔 user媛� �젣�뼱�븷 �닔 �엳寃� 留뚮뱾�뼱�몺
+////// Connection & Close & Commit & rollback  4揶쏆뮆彛� user揶쏉옙 占쎌젫占쎈선占쎈막 占쎈땾 占쎌뿳野껓옙 筌띾슢諭억옙堉깍옙紐�
 public class JDBCTemplate {
-	// �뿰寃고븳 �긽�깭濡� 由ы꽩�빐二쇨쿋�떎.
+	// 占쎈염野껉퀬釉� 占쎄맒占쎄묶嚥∽옙 �뵳�뗪쉘占쎈퉸雅뚯눊荑뗰옙�뼄.
 	public static Connection getConnection() {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -17,7 +17,7 @@ public class JDBCTemplate {
 		}
 
 		String url = "jdbc:oracle:thin:@192.168.0.249:1521:XE";
-		String id = "sminifx";
+		String id = "MPJ_CURD";
 		String pwd = "admin1234";
 		Connection con = null;
 
@@ -30,7 +30,7 @@ public class JDBCTemplate {
 		return con;
 	}
 
-	// �뿰寃� 媛앹껜瑜� 諛쏆븘�꽌(�뿰寃고븳 �긽�깭瑜�) close()�븯寃좊떎.
+	// 占쎈염野껓옙 揶쏆빘猿쒐몴占� 獄쏆룇釉섓옙苑�(占쎈염野껉퀬釉� 占쎄맒占쎄묶�몴占�) close()占쎈릭野껋쥓�뼄.
 	public static void Close(Connection con) {
 		try {
 			if (!con.isClosed() && con != null) {
