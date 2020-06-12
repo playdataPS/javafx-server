@@ -25,7 +25,7 @@ public class User implements Serializable {
 //	public static final int DISCONNECTION = 2;
 	// dao -> sql state 변경
 
-	public User() {
+	public User() {// 기본생성자
 	}
 
 	public User(String name, String message, int state) {

@@ -58,7 +58,6 @@ public class server {
 		System.out.println("서버 서비스를 켭니다.");
 		server sv = new server();
 		sv.user = new Vector<User>(2, 1);
-		
 //		sv.user = new User();
 		sv.service();
 //		UserBiz.get_Nickname(userip);
