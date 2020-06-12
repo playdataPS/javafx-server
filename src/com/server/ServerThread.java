@@ -44,32 +44,41 @@ public class ServerThread implements Runnable {
 
 	// @Override
 	public void run() {
-		// udata = (User)ois.readObject();
+		while (!exit) {
+			try {
+				userdata = (User) ois.readObject();
+				// ����� ��ӽ� ���°� �޾ƿ�� �޼ҵ�
+				Status state = userdata.getStatus();
+				switch (state) {
+				case CONNECTED:
+					sendConnect();
+
+				}
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
+	}
+
+	// connect check & send to client
+	public void sendConnect() {
 		try {
-			userdata = (User) ois.readObject();
-//						udata = ;
-//						udata = (User)ois.readObject();
+			userdata.getOos().writeObject(Status.CONNECTED);
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("sendConnect ���� �����߻�");
 		}
 
 		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
 
+
 	}
-	
-	
-//	public void run() {
-//		// udata = (User)ois.readObject();
-////		try {
-////			userdata = 
-////		} catch (ClassNotFoundException e) {
-////			e.printStackTrace();
-////		} catch (IOException e) {
-////			e.printStackTrace();
-////		}
-//		System.out.println("udata || " + userdata.getNickname() + "||" + userdata.getIp());
-//	}
 }
