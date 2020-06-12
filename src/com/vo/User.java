@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class User implements Serializable {
+
 	
 	/**
 	 * 
@@ -39,8 +40,6 @@ public class User implements Serializable {
 		this.nickname = nickname;
 		
 	}
-
-
 
 	public int getNo() {
 		return no;
