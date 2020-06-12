@@ -27,7 +27,7 @@ public class UserCotroller {
 				break;
 			case 2:
 				System.out.println("선택");
-				String aa = UserBiz.get_Nickname("192.168.0.5");
+				String aa = UserBiz.getNickname("192.168.0.249");
 				System.out.println("get_Nickname 실행했어" + aa);
 				// ip 에 매칭되는 닉네임 값 가져오기
 				break;

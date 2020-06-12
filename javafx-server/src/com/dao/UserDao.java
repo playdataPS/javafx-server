@@ -1,6 +1,9 @@
 package com.dao;
 
 import java.sql.*;
+
+import com.vo.User;
+
 import static common.JDBCTemplate.*;
 
 public class UserDao implements UserSql {
@@ -10,11 +13,10 @@ public class UserDao implements UserSql {
 		this.conn = conn;
 	}
 
-	// 닉네임이 있으면 1, 없으면 0 출력하는 메소드
-	public String get_Nickname(String ip) {
+	// 닉네임이 값을 출력하는 메소드
+	public String getNickname(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet res = null;
-//		int rs = 0;
 		String ret = "";
 		try {
 			pstm = conn.prepareStatement(ch_nick);
@@ -31,5 +33,35 @@ public class UserDao implements UserSql {
 			Close(pstm);
 		}
 		return ret;
+	}
+
+	//ip 로 닉네임 호출
+	public User getNickIP(String ip) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		User vo = null;
+
+		try {
+			pstm = conn.prepareStatement(ch_nickip);
+			pstm.setString(1, ip);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				vo = new User(rs.getString(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+		} finally {
+			Close(rs);
+			Close(pstm);
+		}
+
+		return vo;
+	}
+
+	public int Insert_AllInfo(String ip, String nick) {
+		int ret = 0;
+		PreparedStatement pstm = null;
+		return ret;
+
 	}
 }
