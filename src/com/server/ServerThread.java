@@ -8,13 +8,14 @@ import java.util.Vector;
 import com.vo.*;
 
 public class ServerThread implements Runnable {
-	// µ¥ÀÌÅÍ ÀÚ·áÇü
+
 	Vector<User> udata;
 	User userdata;
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	boolean exit = false;
 	String userip = "";
+
 
 	public ServerThread(Vector<User> user, ObjectInputStream ois, ObjectOutputStream oos) {
 		this.udata = user;
@@ -40,12 +41,13 @@ public class ServerThread implements Runnable {
 		this.oos = oos2;
 	}
 
+
 	// @Override
 	public void run() {
 		while (!exit) {
 			try {
 				userdata = (User) ois.readObject();
-				// »ç¿ëÀÚ Á¢¼Ó½Ã »óÅÂ°ª ¹Þ¾Æ¿À´Â ¸Þ¼Òµå
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 				Status state = userdata.getStatus();
 				switch (state) {
 				case CONNECTED:
@@ -67,8 +69,16 @@ public class ServerThread implements Runnable {
 	public void sendConnect() {
 		try {
 			userdata.getOos().writeObject(Status.CONNECTED);
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
 		} catch (IOException e) {
-			System.out.println("sendConnect ¿¡¼­ ¿¡·¯¹ß»ý");
+			System.out.println("sendConnect ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß»ï¿½");
 		}
+
+		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
+
+
 	}
 }

@@ -8,12 +8,14 @@ import java.net.Socket;
 import java.util.Vector;
 import com.biz.UserBiz;
 
+
 import com.vo.*;
 
 public class server {
-	// µ¥ÀÌÅÍ ÀÚ·áÇü - ¿ì¸®´Â vo ·Î ¿Ó´Ù°«´ÙÇØ
+
+	// ë°ì´í„° ìë£Œí˜• - ìš°ë¦¬ëŠ” vo ë¡œ ì™“ë‹¤ê°“ë‹¤í•´
 	public Vector<User> user;
-	User userdata; // vo °´Ã¼ »ı¼º
+	User userdata; // vo ê°ì²´ ìƒì„±
 	ServerSocket svSocket;
 	Socket soc;
 	ObjectInputStream ois;
@@ -22,32 +24,50 @@ public class server {
 	public void service() {
 
 		try {
-			System.out.println("Á¢¼Ó ÁØºñ");
+
+			System.out.println("ì ‘ì† ì¤€ë¹„");
 			svSocket = new ServerSocket(5555);
 		} catch (IOException e) {
-			System.err.println("¼­ºñ½º ÁØºñÁß ¿¡·¯ ¹ß»ı");
+			System.err.println("ì„œë¹„ìŠ¤ ì¤€ë¹„ì¤‘ ì—ëŸ¬ ë°œìƒ");
+
 		}
 
 		while (true) {
 			try {
 				soc = svSocket.accept();
-				System.out.println(soc.getInetAddress() + "°¡ Á¢¼ÓÇß½À´Ï´Ù.");
 
+        
+				// ì—°ê²° ì†Œì¼“ ê°ì²´ ìƒì„±
+				// ë‹‰ë„¤ì„ì´ë‘ ip ë¥¼ í™•ì¸í•´ì„œ ë„˜ì–´ê°€ì•¼í•˜ëŠ”ë…
+
+				System.out.println(soc.getInetAddress() + "ê°€ ì ‘ì†í–ˆìŠµë‹ˆë‹¤.");
 				ois = new ObjectInputStream(soc.getInputStream());
 				oos = new ObjectOutputStream(soc.getOutputStream());
 				String userip = soc.getInetAddress().toString().replace("/", "");
 				Thread t = new Thread(new ServerThread(user, userip, ois, oos));
 				t.start();
 			} catch (IOException e) {
-				System.err.println("¿¡·¯ ¹ß»ı");
+				System.err.println("ì—ëŸ¬ ë°œìƒ");
+
 			}
 		}
 	}
 
+
 //	public static void main(String[] args) {
-//		System.out.println("¼­¹ö ¼­ºñ½º¸¦ ÄÕ´Ï´Ù.");
+//		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ñ½º¸ï¿½ ï¿½Õ´Ï´ï¿½.");
 //		server sv = new server();
 //		sv.user = new Vector<User>(2, 1);
 //		sv.service();
 //	}
+	public static void main(String[] args) {
+
+		System.out.println("ì„œë²„ ì„œë¹„ìŠ¤ë¥¼ ì¼­ë‹ˆë‹¤.");
+		server sv = new server();
+		sv.user = new Vector<User>(2, 1);
+//		sv.user = new User();
+		sv.service();
+//		UserBiz.get_Nickname(userip);
+
+	}
 }

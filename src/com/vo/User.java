@@ -6,13 +6,10 @@ import java.sql.Date;
 
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5631003516946131139L;
 
 	private int no;
-	private String ip;
+	private String ip; 
 	private String nickname;
 	private int score;
 	private Date regdate;
@@ -39,11 +36,13 @@ public class User implements Serializable {
 		this.nickname = nickname;
 		this.status = status;
 		this.oos = oos;
+
 	}
 
 	public User(String ip, String nickname, Status status) {
 		this(ip, nickname, status, null);
 	}
+
 
 	public User(String ip, String nickname) {
 		super();
