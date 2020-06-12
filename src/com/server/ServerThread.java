@@ -8,13 +8,14 @@ import java.util.Vector;
 import com.vo.*;
 
 public class ServerThread implements Runnable {
-	// 데이터 자료형
+
 	Vector<User> udata;
 	User userdata;
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	boolean exit = false;
 	String userip = "";
+
 
 	public ServerThread(Vector<User> user, ObjectInputStream ois, ObjectOutputStream oos) {
 		this.udata = user;
@@ -40,6 +41,7 @@ public class ServerThread implements Runnable {
 		this.oos = oos2;
 	}
 
+
 	// @Override
 	public void run() {
 		// udata = (User)ois.readObject();
@@ -47,12 +49,15 @@ public class ServerThread implements Runnable {
 			userdata = (User) ois.readObject();
 //						udata = ;
 //						udata = (User)ois.readObject();
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
+
 	}
 	
 	
