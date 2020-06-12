@@ -6,52 +6,41 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class User implements Serializable {
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4894838140464962804L;
 	private int no;
-	private String ip;
+	private String ip; 
 	private String nickname;
 	private int score;
 	private Date regdate;
-	private boolean state;
-
 	private transient ObjectOutputStream oos;
-	private ObjectInputStream ois;
-
-//	public static final int FIRST_CONNECTION = 1;
-	// dao -> sql ȣ�� insert
-//	public static final int DISCONNECTION = 2;
-	// dao -> sql state ����
-
+	private Status status;
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public User(String name, String message, int state) {
-
+	
+	public Status getStatus() {
+		return status;
 	}
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	
 
-	// ����� ���� - ��� ������ ���� ������
-	public User(int no, String ip, String nickname, int score, boolean state) {
-		this.no = no;
+	public User(String ip, String nickname) {
+		super();
 		this.ip = ip;
 		this.nickname = nickname;
-		this.score = score;
-		this.state = state;
+		
 	}
 
-	public User(String nickname, int state) { // ����� �г���, ���°� ������ ������
-//		this()
-	}
 
-	public User(String nickname, String ip) { // ó���� �г����̶� ip ������ ����������
-		this.nickname = nickname;
-		this.ip = ip;
-		// insert �� �̶� �������
-		// dao ȣ��
-	}
 
 	public int getNo() {
 		return no;
