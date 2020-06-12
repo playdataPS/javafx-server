@@ -6,8 +6,11 @@ import java.sql.Date;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 5631003516946131139L;
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int no;
 	private String ip; 
 	private String nickname;

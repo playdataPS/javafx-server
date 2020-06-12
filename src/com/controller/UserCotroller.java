@@ -11,37 +11,37 @@ public class UserCotroller {
 	Vector<User> user;
 
 	public static void main(String[] args) {
-		int r = 0; // ÃÊ±âÈ­
+		int r = 0; // ï¿½Ê±ï¿½È­
 		do {
-			System.out.println("¼±ÅÃÇÏ¼¼¿ä");
+			System.out.println("choice ");
 			Scanner sc = new Scanner(System.in);
 			int no = sc.nextInt();
 			r = no;
 			switch (r) {
 			case 1:
-				// ¼­¹ö ½ÇÇà
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				server sv = new server();
 				System.out.println("1");
 				sv.user = new Vector<User>(2, 1);
 				sv.service();
 				break;
 			case 2:
-				System.out.println("¼±ÅÃ");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½");
 				String aa = UserBiz.getNickname("192.168.0.249");
-				System.out.println("get_Nickname ½ÇÇàÇß¾î" + aa);
-				// ip ¿¡ ¸ÅÄªµÇ´Â ´Ð³×ÀÓ °ª °¡Á®¿À±â
+				System.out.println("get_Nickname ï¿½ï¿½ï¿½ï¿½ï¿½ß¾ï¿½" + aa);
+				// ip ï¿½ï¿½ ï¿½ï¿½Äªï¿½Ç´ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				break;
 			case 3:
-				// ip ¿Í ´Ð³×ÀÓ ºñ±³
+				// ip ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½ï¿½
 				break;
 			case 4:
-				// ·Î±×ÀÎ ¼º°ø (´Ð³×ÀÓ°ú ip ÀÏÄ¡) - °´Ã¼ »ý¼º ÈÄ ´ë±â¹æ ÀÔÀå
+				// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ð³ï¿½ï¿½Ó°ï¿½ ip ï¿½ï¿½Ä¡) - ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				break;
 			case 5:
-				// ·Î±×ÀÎ ½ÇÆÐ(´Ð³×ÀÓ°ú ip ºÒÀÏÄ¡)
+				// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Ð³ï¿½ï¿½Ó°ï¿½ ip ï¿½ï¿½ï¿½ï¿½Ä¡)
 				break;
 			case 6:
-				// È¸¿ø°¡ÀÔ - insert ÇÔ¼ö
+				// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - insert ï¿½Ô¼ï¿½
 				break;
 			}
 		} while (r != 999);
