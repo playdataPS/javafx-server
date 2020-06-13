@@ -47,7 +47,6 @@ public class ServerThread implements Runnable {
 		while (!exit) {
 			try {
 				userdata = (User) ois.readObject();
-				// ����� ��ӽ� ���°� �޾ƿ�� �޼ҵ�
 				Status state = userdata.getStatus();
 				switch (state) {
 				case CONNECTED:

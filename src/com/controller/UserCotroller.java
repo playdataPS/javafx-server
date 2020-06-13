@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import com.biz.UserBiz;
-import com.server.server;
+import com.server.Server;
 import com.vo.*;
 
 public class UserCotroller {
@@ -20,7 +20,7 @@ public class UserCotroller {
 			switch (r) {
 			case 1:
 				// ���� ����
-				server sv = new server();
+				Server sv = new Server();
 				System.out.println("1");
 				sv.user = new Vector<User>(2, 1);
 				sv.service();

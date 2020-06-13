@@ -18,12 +18,22 @@ public class User implements Serializable {
 	private Date regdate;
 	private transient ObjectOutputStream oos;
 	private Status status;
+	private int roomNo;
 
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public User(String ip) {
+	}
+	
+	
+	public int getRoomNo() {
+		return roomNo;
+	}
+	
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
 	}
 
 	public Status getStatus() {
