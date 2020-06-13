@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
 
+import com.controller.UserCotroller;
 import com.vo.*;
 
 public class ServerThread implements Runnable {
@@ -15,7 +16,6 @@ public class ServerThread implements Runnable {
 	ObjectOutputStream oos;
 	boolean exit = false;
 	String userip = "";
-	
 
 	public ServerThread(Vector<User> user, ObjectInputStream ois, ObjectOutputStream oos) {
 		this.udata = user;
@@ -41,13 +41,11 @@ public class ServerThread implements Runnable {
 		this.oos = oos2;
 	}
 
-
 	// @Override
 	public void run() {
 		while (!exit) {
 			try {
 				userdata = (User) ois.readObject();
-				// ����� ��ӽ� ���°� �޾ƿ�� �޼ҵ�
 				Status state = userdata.getStatus();
 				switch (state) {
 				case CONNECTED:
@@ -73,14 +71,12 @@ public class ServerThread implements Runnable {
 	// connect check & send to client
 	public void sendConnect() {
 		try {
+			//biz -> dao-> query
+//			UserCotroller.Select("ckUser");
 			userdata.getOos().writeObject(userdata);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		System.out.println("udata || " + userdata.getNickname() + "||" + userip);
-
-
 	}
 }
