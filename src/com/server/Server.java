@@ -11,7 +11,7 @@ import com.biz.UserBiz;
 
 import com.vo.*;
 
-public class server {
+public class Server {
 
 	// 데이터 자료형 - 우리는 vo 로 왓다갓다해
 	public Vector<User> user;
@@ -63,7 +63,7 @@ public class server {
 	public static void main(String[] args) {
 
 		System.out.println("서버 서비스를 켭니다.");
-		server sv = new server();
+		Server sv = new Server();
 		sv.user = new Vector<User>(2, 1);
 //		sv.user = new User();
 		sv.service();
