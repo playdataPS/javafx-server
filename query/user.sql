@@ -3,16 +3,34 @@ select * from MPJ.GAME_USER;
 
 
 
-
-//ip À¯¹«È®ÀÎ
+//ip ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½
 SELECT IP FROM MPJ.GAME_USER WHERE IP = '192.168.0.5';
 SELECT IP FROM MPJ.GAME_USER WHERE IP = '192.168.0.6';
-
-//IP ·Î ´Ğ³×ÀÓ°ª È®ÀÎ
+SELECT IP FROM GAME_USER WHERE IP = '192.168.0.5';
+//IP ï¿½ï¿½ ï¿½Ğ³ï¿½ï¿½Ó°ï¿½ È®ï¿½ï¿½
 select nickname from MPJ.GAME_USER 
 where ip = '192.168.0.5';
 
-//IP, ´Ğ³×ÀÓ ÀÔ·Â
+//insert game_user
 insert into 
 MPJ.GAME_USER(no, ip, nickname) 
 values(MPJ.num_seq.nextval,'192.168.0.5', 'eunhye');
+
+insert into 
+GAME_USER(no, ip, nickname) 
+values(num_seq.nextval,'192.168.0.5', 'eunhye');
+
+
+//Insert
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ê¸ˆê°•ì‚°');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ì˜¤ì§€í˜œ');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ê¹€ë‹¤ë¹ˆ');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ìµœì€í˜œ');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ë°°ìœ¤í¬');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ê¹€ê±´ë™');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ìì „ê±°');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ê°•ì‚¬ë‹˜');
+insert into dict(no, word) values(DICT_SEQ.nextval, 'ë°”ë‹·ê°€');
+
+//select
+select * from dict;
