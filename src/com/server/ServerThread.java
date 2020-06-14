@@ -3,6 +3,7 @@ package com.server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.Vector;
 
 import com.vo.*;
@@ -13,6 +14,7 @@ public class ServerThread implements Runnable {
 	User userdata;
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
+	Socket socket;
 	boolean exit = false;
 	String userip = "";
 	
@@ -40,6 +42,19 @@ public class ServerThread implements Runnable {
 		this.ois = ois2;
 		this.oos = oos2;
 	}
+	
+	public ServerThread(Vector<User> user, String userip, Socket socket) {
+		this.udata = user;
+		this.userip = userip;
+		this.socket = socket;
+		try {
+			this.ois = new ObjectInputStream(socket.getInputStream());
+			this.oos = new ObjectOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 	// @Override
@@ -48,11 +63,20 @@ public class ServerThread implements Runnable {
 			try {
 				userdata = (User) ois.readObject();
 				Status state = userdata.getStatus();
+				System.out.println(state);
 				switch (state) {
 				case CONNECTED:
 					userdata.setOos(oos);
 					udata.add(userdata);
+					
 					sendConnect();
+					break;
+				case WAITING:
+					System.out.println(userdata.getNickname());
+					System.out.println(userdata.getGameRoom().getTitle());
+					Thread x = new Thread(new RoomThread( userdata.getGameRoom(), socket));
+					x.start();
+					break;
 				default:
 					System.out.println("error");
 					break;

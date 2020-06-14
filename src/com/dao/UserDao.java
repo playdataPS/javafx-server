@@ -13,7 +13,7 @@ public class UserDao implements UserSql {
 		this.conn = conn;
 	}
 
-	// IP °ª À¯¹« È®ÀÎ
+	// IP ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public String getIP(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -24,7 +24,7 @@ public class UserDao implements UserSql {
 			pstm.setString(1, ip);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				userdata = new User(rs.getString(1));
+				//userdata = new User(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -35,7 +35,7 @@ public class UserDao implements UserSql {
 		return userip;
 	}
 
-	// ´Ð³×ÀÓÀÌ °ªÀ» Ãâ·ÂÇÏ´Â ¸Þ¼Òµå
+	// ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	public String getNickname(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet res = null;
@@ -57,7 +57,7 @@ public class UserDao implements UserSql {
 		return ret;
 	}
 
-	// ip ·Î ´Ð³×ÀÓ È£Ãâ
+	// ip ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 	public User getNickIP(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;

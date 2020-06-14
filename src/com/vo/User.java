@@ -3,6 +3,7 @@ package com.vo;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -18,32 +19,12 @@ public class User implements Serializable {
 	private Date regdate;
 	private transient ObjectOutputStream oos;
 	private Status status;
-	private int roomNo;
+	private Room gameRoom;
+	private List<User> userList;
 
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public User(String ip) {
-	}
-	
-	
-	public int getRoomNo() {
-		return roomNo;
-	}
-	
-	public void setRoomNo(int roomNo) {
-		this.roomNo = roomNo;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
 	public User(String ip, String nickname, Status status, ObjectOutputStream oos) {
 		this.ip = ip;
 		this.nickname = nickname;
@@ -62,6 +43,46 @@ public class User implements Serializable {
 		this.ip = ip;
 		this.nickname = nickname;
 	}
+	
+	
+
+	public User(int no,String ip, String nickname, int score, Date regdate,Status status ,ObjectOutputStream oos) {
+		this.no = no;
+		this.ip = ip;
+		this.nickname = nickname;
+		this.score = score;
+		this.regdate = regdate;
+		this.status = status;
+		this.oos = oos;
+	}
+	
+	public User(int no,String ip, String nickname, int score, Date regdate,Status status) {
+		this(no, ip, nickname, score, regdate, status, null);
+	}
+	
+	public List<User> getUserList() {
+		return userList;
+	}
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+	public Room getGameRoom() {
+		return gameRoom;
+	}
+	
+	public void setGameRoom(Room gameRoom) {
+		this.gameRoom = gameRoom;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	
 
 	public int getNo() {
 		return no;
