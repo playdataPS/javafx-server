@@ -66,6 +66,7 @@ public class ServerThread implements Runnable {
 				System.out.println(state);
 				switch (state) {
 				case CONNECTED:
+					//login 
 					userdata.setOos(oos);
 					udata.add(userdata);
 					
