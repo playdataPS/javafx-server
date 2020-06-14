@@ -47,12 +47,13 @@ public class ServerThread implements Runnable {
 		this.udata = user;
 		this.userip = userip;
 		this.socket = socket;
+
 		try {
 			this.ois = new ObjectInputStream(socket.getInputStream());
 			this.oos = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 
