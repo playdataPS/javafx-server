@@ -26,13 +26,11 @@ public class UserCotroller {
 				sv.service();
 				break;
 			case 2:
-				System.out.println("����");
 				String aa = UserBiz.getNickname("192.168.0.249");
-				System.out.println("get_Nickname �����߾�" + aa);
-				// ip �� ��Ī�Ǵ� �г��� �� ��������
+				System.out.println("get_Nickname " + aa);
 				break;
 			case 3:
-				// ip �� �г��� ��
+//				UserBiz.CheckUser("192.);
 				break;
 			case 4:
 				// �α��� ���� (�г��Ӱ� ip ��ġ) - ��ü ���� �� ���� ����
@@ -47,4 +45,12 @@ public class UserCotroller {
 		} while (r != 999);
 
 	}
+
+//	public static void Select(String select) {
+//		switch (select) {
+//		case "ckUser":
+//			System.out.println("체크");
+//			break;
+//		}
+//	}
 }

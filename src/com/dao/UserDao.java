@@ -13,18 +13,27 @@ public class UserDao implements UserSql {
 		this.conn = conn;
 	}
 
+<<<<<<< HEAD
 	// IP �� ���� Ȯ��
 	public String getIP(String ip) {
+=======
+	// check ip exist
+	public int getIP(String ip) {
+>>>>>>> 969954c6cccd753d50682d1b17dcc8714be0f270
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		User userdata = null;
-		String userip = "";
+		int cnt = 0;
 		try {
 			pstm = conn.prepareStatement(ch_ip);
 			pstm.setString(1, ip);
+			System.out.println("넘어와" + ip);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
+<<<<<<< HEAD
 				//userdata = new User(rs.getString(1));
+=======
+				cnt = rs.getInt(1);
+>>>>>>> 969954c6cccd753d50682d1b17dcc8714be0f270
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -32,10 +41,14 @@ public class UserDao implements UserSql {
 			Close(rs);
 			Close(pstm);
 		}
-		return userip;
+		return cnt;
 	}
 
+<<<<<<< HEAD
 	// �г����� ���� ����ϴ� �޼ҵ�
+=======
+	// check nickname
+>>>>>>> 969954c6cccd753d50682d1b17dcc8714be0f270
 	public String getNickname(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet res = null;
@@ -46,7 +59,6 @@ public class UserDao implements UserSql {
 			res = pstm.executeQuery();
 			while (res.next()) {
 				ret = res.getString(1);
-				System.out.println(ret);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -57,18 +69,23 @@ public class UserDao implements UserSql {
 		return ret;
 	}
 
+<<<<<<< HEAD
 	// ip �� �г��� ȣ��
+=======
+>>>>>>> 969954c6cccd753d50682d1b17dcc8714be0f270
 	public User getNickIP(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		User vo = null;
+		User usernick = null;
+//		String vo = null;
 
 		try {
 			pstm = conn.prepareStatement(ch_nickip);
 			pstm.setString(1, ip);
+
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				vo = new User(rs.getString(1), rs.getString(2));
+				usernick = new User(rs.getString(1), rs.getString(2));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -77,13 +94,25 @@ public class UserDao implements UserSql {
 			Close(pstm);
 		}
 
-		return vo;
+		return usernick;
 	}
 
 	public int Insert_AllInfo(String ip, String nick) {
 		int ret = 0;
 		PreparedStatement pstm = null;
+		try {
+			pstm = conn.prepareStatement(insert_allinfo);
+			pstm.setString(1, ip);
+			pstm.setString(2, nick);
+			ret = pstm.executeUpdate();
+			System.out.println(ret);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Commit(conn);
+		}
 		return ret;
 
 	}
+
 }

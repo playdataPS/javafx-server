@@ -9,11 +9,14 @@ import java.sql.SQLException;
 import com.vo.User;
 
 public interface UserSql {
-	//ip ¡∏¿Á »Æ¿Œ
-	String ch_ip = "SELECT IP FROM MPJ.GAME_USER WHERE IP = ?";
-	//¥–≥◊¿”√º≈©
-	String ch_nick = "select nickname from MPJ.GAME_USER \r\n" + "where ip = ?";
-	String insert_allinfo = "Insert into MPJ.GAME_USER(no, ip, nickname) \r\n" + "values(MPJ.num_seq.nextval,?, ?)";
+	//ip ÔøΩÔøΩÔøΩÔøΩ »ÆÔøΩÔøΩ
+//	String ch_ip = "SELECT IP FROM MPJ.GAME_USER WHERE IP = ?";
+	String ch_ip = "SELECT count(IP) FROM GAME_USER WHERE IP = ?";
+//	String ch_nick = "select nickname from MPJ.GAME_USER where ip = ?";
+	String ch_nick = "select nickname from GAME_USER where ip = ?";
+//	String insert_allinfo = "Insert into MPJ.GAME_USER(no, ip, nickname) values(MPJ.num_seq.nextval,?, ?)";
+	String insert_allinfo = "Insert into GAME_USER(no, ip, nickname) values(num_seq.nextval,?, ?)";
+	
 	String ch_nickip = "select nickname from MPJ.GAME_USER where ip=?";
-
+	//ÏóÜÏñ¥ÎèÑ Îê†Í≤ÉÍ∞ôÏùÄÎéÖ
 }
