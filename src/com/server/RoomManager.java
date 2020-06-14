@@ -1,8 +1,12 @@
 package com.server;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.vo.Room;
 import com.vo.User;
 /*
  * 방 생성, 삭제, 방리스트 
@@ -24,10 +28,11 @@ public class RoomManager {
 		
 	}
 	
-	public void createRoom(User roomOwner) {
+	public static void createRoom(User roomOwner, ObjectInputStream ois, ObjectOutputStream oos) {
 		int roomNo = atomicInteger.incrementAndGet();
-		
-		Thread t = new Thread(new RoomThread(roomOwner, roomNo));
+		Room gameRoom = new Room(roomNo, roomOwner, roomOwner.getGameRoom().getTitle(), 
+				roomOwner.getGameRoom().getMaxSize(), roomOwner.getGameRoom().getStatus());
+		Thread t = new Thread(new RoomThread(gameRoom, ois, oos));
 		t.start();
 	}
 	

@@ -3,42 +3,89 @@ package com.server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import com.vo.Room;
 import com.vo.RoomStatus;
+import com.vo.Status;
 import com.vo.User;
 
 public class RoomThread implements Runnable{
-	private int no;//방번호
+	
 	private List<User> userList;//유저 리스트 
-	private User roomOwner;//방장
-	private String title;//방이름
-	private RoomStatus status;//방상태 
-	private int MaxSize;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
+	private Socket socket;
+	private User gameUser;
+	private Room gameRoom;
+	private boolean exit = false;
 	
+	private static List roomList;// 방리스트는 한개만 
+	private static AtomicInteger atomicInteger;
+	
+	static {
+        roomList = new ArrayList();
+        atomicInteger = new AtomicInteger();
+    }
 	public RoomThread() {
 		// TODO Auto-generated constructor stub
 	}
+	public RoomThread(Room gameRoom , Socket socket) {
+		this.gameRoom = gameRoom;
+		//this.socket = socket;
+		
+		try {
+            ois = new ObjectInputStream(socket.getInputStream());
+            oos = new ObjectOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+//            e.printStackTrace();
+            System.out.println("> Failed to get in/out stream of client socket.");
+        }
+	}
 	
-	public RoomThread(User roomOwner, int no, ObjectInputStream ois, ObjectOutputStream oos) {
-		this.roomOwner = roomOwner;
-		this.no = no;
+	public RoomThread(User user) {
+		gameUser = user;
+	}
+	
+	public RoomThread(Room gameRoom, ObjectInputStream ois, ObjectOutputStream oos) {
+		this.gameRoom = gameRoom;
 		this.ois = ois;
 		this.oos = oos;
-		userList = new ArrayList<User>();
 	}
 	
-	public RoomThread(User roomOwner, int no) {
-		this.roomOwner = roomOwner;
-		this.no = no;
-	}
 	
 	@Override
 	public void run() {
-		
+		System.out.println("game"+exit);
+		while(!exit) {
+			try {
+				System.out.println("game"+gameRoom.getRoomOwner().getStatus());
+				
+				gameUser = (User) ois.readObject();
+				
+				RoomStatus roomStatus = gameUser.getGameRoom().getStatus();
+				System.out.println(roomStatus);
+				switch (roomStatus) {
+				
+				case WAITING:
+					
+					System.out.println(gameUser.getGameRoom().getTitle()+ " 방 입성!");
+				break;
+
+				default:
+					break;
+				}
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			//create room
+		}
 		
 	}
 
@@ -58,77 +105,7 @@ public class RoomThread implements Runnable{
 	}
 
 
-	public int getNo() {
-		return no;
-	}
-
-
-
-	public void setNo(int no) {
-		this.no = no;
-	}
-
-
-
-	public List<User> getUserList() {
-		return userList;
-	}
-
-
-
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
-	}
-
-
-
-	public User getRoomOwner() {
-		return roomOwner;
-	}
-
-
-
-	public void setRoomOwner(User roomOwner) {
-		this.roomOwner = roomOwner;
-	}
-
-
-
-	public String getTitle() {
-		return title;
-	}
-
-
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-
-	public RoomStatus getStatus() {
-		return status;
-	}
-
-
-
-	public void setStatus(RoomStatus status) {
-		this.status = status;
-	}
-
-
-
-	public int getMaxSize() {
-		return MaxSize;
-	}
-
-
-
-	public void setMaxSize(int maxSize) {
-		MaxSize = maxSize;
-	}
-
-
+	
 
 
 	

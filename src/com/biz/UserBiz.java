@@ -10,13 +10,16 @@ import com.vo.User;
 public class UserBiz {
 	public static String getNickname(String ip) {
 		Connection conn = getConnection();
-		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½");
+		System.out.println("¿¬°á‰Î");
 		String ret = new UserDao(conn).getNickname(ip);
 		Close(conn);
-		System.out.println("ï¿½ï¿½ï¿½á³¡");
+		System.out.println("¿¬°á³¡");
 		return ret;
 	}
 
+	//
+
+	// ´Ğ³×ÀÓ, ip ¸ğµÎ ÀÔ·Â¹Ş¾Æ¼­ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
 	public static boolean getNickIp(User udata) {
 		Connection conn = getConnection();
 		User ret = new UserDao(conn).getNickIP(udata.getIp());
@@ -27,39 +30,5 @@ public class UserBiz {
 		}
 	}
 
-	public static void CheckUser(String ip, String nickname) {
-		// 1. ip ìœ ë¬´ ì²´í¬
-		System.out.println("ì‹¤í–‰");
-		Connection conn = getConnection();
-		int count = new UserDao(conn).getIP(ip);
-		if (count > 0) {
-			// 2. ìˆìœ¼ë©´ ë‹‰ë„¤ì„ ê°€ì ¸ì˜¤ê¸°
-			String nick = new UserDao(conn).getNickname(ip);
-			System.out.println(nick);
-			if (nick.equals(nickname)) {
-				System.out.println("ê°™ë‹¤");
-				// room list
-				// 3. ìˆëŠ”ë° ë‹‰ë„¤ì„ ê°™ìœ¼ë©´ ë°©ë¦¬ìŠ¤íŠ¸ë¡œ
-			} else {
-				System.out.println("ë‹¬ë¼");
-				// nickname
-				// 4. ìˆëŠ”ë° ë‹‰ë„¤ì„ ë‹¤ë¥´ë©´ ë‹¤ì‹œë¡œê·¸ì¸
-			}
-		} else {
-			System.out.println("ì—†ì„ë•Œ");
-			int cnt = new UserDao(conn).Insert_AllInfo(ip, nickname);
-			System.out.println(cnt);
-			// 5. ì—†ìœ¼ë©´ insert
-		}
-
-	}
-
-	public static void main(String[] args) {
-		String nickname = "ìœ¼ë„¤";
-//		String nickname = "eunhye";
-//		String ip = "192.168.0.249";
-		String ip = "192.168.0.249";
-//		String ip = "192.168.0.5";
-		CheckUser(ip, nickname);
-	}
+	// ip ¾øÀ¸¸é Áö±İ ÀÔ·ÂÇÑ ´Ğ³×ÀÓ, ip ÀÔ·Â
 }
