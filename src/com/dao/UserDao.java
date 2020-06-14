@@ -97,5 +97,4 @@ public class UserDao implements UserSql {
 		return ret;
 
 	}
-
 }

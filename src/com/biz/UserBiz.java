@@ -54,6 +54,7 @@ public class UserBiz {
 
 	}
 
+
 	public static void main(String[] args) {
 		String nickname = "으네";
 //		String nickname = "eunhye";
