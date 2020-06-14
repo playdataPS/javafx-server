@@ -7,11 +7,12 @@ import com.vo.User;
 import static common.JDBCTemplate.*;
 
 public class UserDao implements UserSql {
-	private Connection conn;
+   private Connection conn;
 
-	public UserDao(Connection conn) {
-		this.conn = conn;
-	}
+   public UserDao(Connection conn) {
+      this.conn = conn;
+   }
+
 
 	// check ip  exist
 	public int getIP(String ip) {
@@ -97,4 +98,5 @@ public class UserDao implements UserSql {
 		return ret;
 
 	}
+
 }

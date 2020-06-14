@@ -31,8 +31,43 @@ public class UserBiz {
 	}
 
 
+	
+	public User getLoginUser(User user) {
+		User loginUser = null;
+		String ip = user.getIp();
+		String nickname = user.getNickname();
+		Connection conn = getConnection();
+		int count = new UserDao(conn).getIP(ip);
+		if (count > 0) {
+			// 2. 있으면 닉네임 가져오기
+			String nick = new UserDao(conn).getNickname(ip);
+			System.out.println(nick);
+			if (nick.equals(nickname)) {
+				System.out.println("같다");
+				// room list
+				// 3. 있는데 닉네임 같으면 방리스트로
+				 loginUser = new UserDao(conn).getNickIP(ip);
+			} else {
+				System.out.println("달라");
+				// nickname
+				// 4. 있는데 닉네임 다르면 다시로그인
+				
+			}
+		} else {
+			System.out.println("없을때");
+			int cnt = new UserDao(conn).Insert_AllInfo(ip, nickname);
+			System.out.println(cnt);
+			// 5. 없으면 insert
+			loginUser = new UserDao(conn).getNickIP(ip);
+		}
+		return loginUser;
+		
+	}
+}
+
+
 	public static void CheckUser(String ip, String nickname) {
-		// 1. ip 臾 泥댄
+		// 1. ip 臾 泥댄
 		System.out.println("ㅽ");
 		Connection conn = getConnection();
 		int count = new UserDao(conn).getIP(ip);
@@ -47,7 +82,7 @@ public class UserBiz {
 			} else {
 				System.out.println("щ");
 				// nickname
-				// 4.  ㅼ ㅻⅤ硫 ㅼ濡洹몄
+				// 4.  ㅼ ㅻⅤ硫 ㅼ濡洹몄
 			}
 		} else {
 			System.out.println("");
@@ -71,3 +106,4 @@ public class UserBiz {
 	// ip 없으면 지금 입력한 닉네임, ip 입력
 
 }
+
