@@ -13,18 +13,18 @@ public class UserDao implements UserSql {
 		this.conn = conn;
 	}
 
-	// check ip exist
-	public int getIP(String ip) {
+	// IP �� ���� Ȯ��
+	public String getIP(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		int cnt = 0;
+		User userdata = null;
+		String userip = "";
 		try {
 			pstm = conn.prepareStatement(ch_ip);
 			pstm.setString(1, ip);
-			System.out.println("넘어와" + ip);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				cnt = rs.getInt(1);
+				//userdata = new User(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -32,10 +32,10 @@ public class UserDao implements UserSql {
 			Close(rs);
 			Close(pstm);
 		}
-		return cnt;
+		return userip;
 	}
 
-	// check nickname
+	// �г����� ���� ����ϴ� �޼ҵ�
 	public String getNickname(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet res = null;
@@ -46,6 +46,7 @@ public class UserDao implements UserSql {
 			res = pstm.executeQuery();
 			while (res.next()) {
 				ret = res.getString(1);
+				System.out.println(ret);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -56,19 +57,18 @@ public class UserDao implements UserSql {
 		return ret;
 	}
 
+	// ip �� �г��� ȣ��
 	public User getNickIP(String ip) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		User usernick = null;
-//		String vo = null;
+		User vo = null;
 
 		try {
 			pstm = conn.prepareStatement(ch_nickip);
 			pstm.setString(1, ip);
-
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				usernick = new User(rs.getString(1), rs.getString(2));
+				vo = new User(rs.getString(1), rs.getString(2));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -77,23 +77,12 @@ public class UserDao implements UserSql {
 			Close(pstm);
 		}
 
-		return usernick;
+		return vo;
 	}
 
 	public int Insert_AllInfo(String ip, String nick) {
 		int ret = 0;
 		PreparedStatement pstm = null;
-		try {
-			pstm = conn.prepareStatement(insert_allinfo);
-			pstm.setString(1, ip);
-			pstm.setString(2, nick);
-			ret = pstm.executeUpdate();
-			System.out.println(ret);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Commit(conn);
-		}
 		return ret;
 
 	}
