@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class JDBCTemplate {
 
 	public static Connection getConnection() {
@@ -19,7 +18,7 @@ public class JDBCTemplate {
 		String url = "jdbc:oracle:thin:localhost:1521:XE";
 
 		String id = "MPJ_CURD";
-
+    
 		String pwd = "admin1234";
 		Connection con = null;
 
