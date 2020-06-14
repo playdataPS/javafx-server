@@ -41,10 +41,8 @@ public class Server {
 				// 닉네임이랑 ip 를 확인해서 넘어가야하는뎅
 
 				System.out.println(soc.getInetAddress() + "가 접속했습니다.");
-				ois = new ObjectInputStream(soc.getInputStream());
-				oos = new ObjectOutputStream(soc.getOutputStream());
 				String userip = soc.getInetAddress().toString().replace("/", "");
-				Thread t = new Thread(new ServerThread(user, userip, ois, oos));
+				Thread t = new Thread(new ServerThread(user, userip, soc));
 				t.start();
 			} catch (IOException e) {
 				System.err.println("에러 발생");
