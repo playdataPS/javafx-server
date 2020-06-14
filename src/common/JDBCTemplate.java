@@ -15,7 +15,7 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 
-		String url = "jdbc:oracle:thin:localhost:1521:XE";
+		String url = "jdbc:oracle:thin:@localhost:1521:XE";
 
 		String id = "MPJ_CURD";
     

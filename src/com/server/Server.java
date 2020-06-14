@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.*;
 import java.util.Vector;
 import com.biz.UserBiz;
 
@@ -14,7 +15,8 @@ import com.vo.*;
 public class Server {
 
 	// 데이터 자료형 - 우리는 vo 로 왓다갓다해
-	public Vector<User> user;
+	//public Vector<User> user;
+	public ArrayList<User> user;
 	User userdata; // vo 객체 생성
 	ServerSocket svSocket;
 	Socket soc;
@@ -62,7 +64,8 @@ public class Server {
 
 		System.out.println("서버 서비스를 켭니다.");
 		Server sv = new Server();
-		sv.user = new Vector<User>(2, 1);
+		sv.user = new ArrayList<User>();
+		
 //		sv.user = new User();
 		sv.service();
 //		UserBiz.get_Nickname(userip);

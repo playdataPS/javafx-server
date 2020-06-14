@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -22,12 +23,12 @@ public class UserCotroller {
 				// ���� ����
 				Server sv = new Server();
 				System.out.println("1");
-				sv.user = new Vector<User>(2, 1);
+				sv.user = new ArrayList<User>();
 				sv.service();
 				break;
 			case 2:
 				System.out.println("����");
-				String aa = UserBiz.getNickname("192.168.0.249");
+				String aa = UserBiz.getNickname("127.0.0.1");
 				System.out.println("get_Nickname �����߾�" + aa);
 				// ip �� ��Ī�Ǵ� �г��� �� ��������
 				break;
