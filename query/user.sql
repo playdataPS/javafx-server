@@ -4,15 +4,16 @@ select * from MPJ.GAME_USER;
 
 
 
-//ip À¯¹«È®ÀÎ
+//ip ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½
 SELECT IP FROM MPJ.GAME_USER WHERE IP = '192.168.0.5';
-SELECT IP FROM MPJ.GAME_USER WHERE IP = '192.168.0.6';
+SELECT IP FROM MPJ_CURD.GAME_USER WHERE IP = '127.0.0.1';
+SELECT count(IP) FROM MPJ_CURD.GAME_USER WHERE IP ='127.0.0.1';
 
-//IP ·Î ´Ð³×ÀÓ°ª È®ÀÎ
+//IP ï¿½ï¿½ ï¿½Ð³ï¿½ï¿½Ó°ï¿½ È®ï¿½ï¿½
 select nickname from MPJ.GAME_USER 
 where ip = '192.168.0.5';
 
-//IP, ´Ð³×ÀÓ ÀÔ·Â
+//IP, ï¿½Ð³ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 insert into 
-MPJ.GAME_USER(no, ip, nickname) 
-values(MPJ.num_seq.nextval,'192.168.0.5', 'eunhye');
+MPJ_curd.GAME_USER(no, ip, nickname) 
+values(MPJ_curd.num_seq.nextval,'127.0.0.1', 'eunhye');

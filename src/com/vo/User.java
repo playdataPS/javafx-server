@@ -24,6 +24,15 @@ public class User implements Serializable {
 	private MessageType type;
 	private Room gameRoom;
 	private List<User> userList;
+	private  Node pointer;
+	
+	class Node{
+		double x,y;
+		public Node(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
 
 
 	public User() {
@@ -67,6 +76,14 @@ public class User implements Serializable {
 	
 	public User(int no,String ip, String nickname, int score, Date regdate,Status status) {
 		this(no, ip, nickname, score, regdate, status, null);
+	}
+	
+	public Node getPointer() {
+		return pointer;
+	}
+	
+	public void setPointer(Node pointer) {
+		this.pointer = pointer;
 	}
 	
 	public List<User> getUserList() {
@@ -161,19 +178,7 @@ public class User implements Serializable {
 		this.type = type;
 	}
 
-	/**
-	 * @return the userList
-	 */
-	public ArrayList<User> getUserList() {
-		return userList;
-	}
-
-	/**
-	 * @param userList the userList to set
-	 */
-	public void setUserList(ArrayList<User> userList) {
-		this.userList = userList;
-	}
+	
 
 	/**
 	 * @return the oos

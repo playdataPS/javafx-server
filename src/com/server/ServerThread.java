@@ -90,6 +90,7 @@ public class ServerThread implements Runnable {
 				switch (state) {
 				case CONNECTED:
 					//login 
+					
 					//userdata = new UserBiz().getLoginUser(userdata);
 					System.out.println("CONNECTED");
 					List<User> users = new ArrayList<User>();
@@ -101,9 +102,6 @@ public class ServerThread implements Runnable {
 					userdata.setUserList(users);
 					userdata.setStatus(Status.WAITING); //방으로 넘어감 
 					broadCasting();
-					
-					
-					
 					break;
 				case WAITING: //방에 들어옴 
 					System.out.println("WAITING");

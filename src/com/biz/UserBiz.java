@@ -36,8 +36,10 @@ public class UserBiz {
 		User loginUser = null;
 		String ip = user.getIp();
 		String nickname = user.getNickname();
+		System.out.println("getLoginUser"+ip+" "+nickname);
 		Connection conn = getConnection();
 		int count = new UserDao(conn).getIP(ip);
+		System.out.println("count : "+count);
 		if (count > 0) {
 			// 2. 있으면 닉네임 가져오기
 			String nick = new UserDao(conn).getNickname(ip);
@@ -63,10 +65,7 @@ public class UserBiz {
 		return loginUser;
 		
 	}
-}
-
-
-	public static void CheckUser(String ip, String nickname) {
+public static void CheckUser(String ip, String nickname) {
 		// 1. ip 臾 泥댄
 		System.out.println("ㅽ");
 		Connection conn = getConnection();
@@ -106,4 +105,3 @@ public class UserBiz {
 	// ip 없으면 지금 입력한 닉네임, ip 입력
 
 }
-
