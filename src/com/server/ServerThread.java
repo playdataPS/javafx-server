@@ -45,12 +45,6 @@ public class ServerThread implements Runnable {
 		this.userdata = user;
 	}
 
-	public ServerThread(Vector<User> user, String userip, ObjectInputStream ois2, ObjectOutputStream oos2) {
-		this.udata = user;
-		this.userip = userip;
-		this.ois = ois2;
-		this.oos = oos2;
-	}
 	
 	public ServerThread(ArrayList<User> user, String userip, Socket socket) {
 		this.userList = user;
@@ -65,26 +59,13 @@ public class ServerThread implements Runnable {
 		}
 	}
 	
-	public ServerThread(Vector<User> user, String userip, Socket socket) {
-		this.udata = user;
-		this.userip = userip;
-		this.socket = socket;
-		try {
-			this.ois = new ObjectInputStream(socket.getInputStream());
-			this.oos = new ObjectOutputStream(socket.getOutputStream());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
+	
 
 	// @Override
 	public void run() {
 		while (!exit) {
 			try {
 				userdata = (User) ois.readObject();
-				
 				Status state = userdata.getStatus();
 				System.out.println(state);
 				switch (state) {
