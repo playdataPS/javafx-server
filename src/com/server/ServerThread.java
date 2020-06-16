@@ -104,7 +104,10 @@ public class ServerThread implements Runnable {
 					}// if end 
 					
 					break;
+				case PLAYING:
 					
+					
+					break;
 				case DISCONNECTED:
 					System.out.println("DISCONNECTED");
 					String name = userdata.getNickname();
