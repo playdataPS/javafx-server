@@ -1,18 +1,64 @@
 package com.vo;
 
 import java.sql.Date;
+import java.util.Queue;
+
+import javafx.scene.paint.Color;
 
 public class Game {
 	private int no;
 	private int dictNo;
 	private String img;
 	private Date regdate;
-	private double x,y;
+	private Color color;
+	private Point point;
+	private User seeker;
+	private Queue<User> drowingUserQue;
+	private GameStatus status;
 	
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public GameStatus getStatus() {
+		return status;
+	}
+	
+	public void setStatus(GameStatus status) {
+		this.status = status;
+	}
+	
+	public User getSeeker() {
+		return seeker;
+	}
+	public void setSeeker(User seeker) {
+		this.seeker = seeker;
+	}
+	
+	public Queue<User> getDrowingUserQue() {
+		return drowingUserQue;
+	}
+	
+	public void setDrowingUserQue(Queue<User> drowingUserQue) {
+		this.drowingUserQue = drowingUserQue;
+	}
+	
+	public Point getPoint() {
+		return point;
+	}
+	
+	public void setPoint(Point point) {
+		this.point = point;
+	}
+	
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
+	public Color getColor() {
+		return color;
+	}
+
 	public int getNo() {
 		return no;
 	}

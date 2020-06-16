@@ -4,6 +4,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.Queue;
 
 
 public class User implements Serializable {
@@ -24,17 +25,9 @@ public class User implements Serializable {
 	private MessageType type;
 	private Room gameRoom;
 	private List<User> userList;
-	private  Node pointer;
+	private Game gameData;
+	private Queue<Game> gameQue;
 	
-	class Node{
-		double x,y;
-		public Node(double x, double y) {
-			this.x = x;
-			this.y = y;
-		}
-	}
-
-
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
@@ -76,14 +69,6 @@ public class User implements Serializable {
 	
 	public User(int no,String ip, String nickname, int score, Date regdate,Status status) {
 		this(no, ip, nickname, score, regdate, status, null);
-	}
-	
-	public Node getPointer() {
-		return pointer;
-	}
-	
-	public void setPointer(Node pointer) {
-		this.pointer = pointer;
 	}
 	
 	public List<User> getUserList() {
@@ -193,5 +178,7 @@ public class User implements Serializable {
 	public void setOos(ObjectOutputStream oos) {
 		this.oos = oos;
 	}
+
+	
 
 }

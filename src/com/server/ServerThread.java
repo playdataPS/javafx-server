@@ -14,7 +14,7 @@ import com.vo.*;
 public class ServerThread implements Runnable {
 
 	Vector<User> udata;
-	List<User> userList;
+	List<User> userList; //소켓 킨 유저들 목록 
 	User userdata;
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
@@ -79,6 +79,7 @@ public class ServerThread implements Runnable {
 					userList.add(userdata);
 					for(User data: userList) {
 						users.add(data);
+						
 					}//for end 
 					userdata.setUserList(users);
 					userdata.setStatus(Status.WAITING); //방으로 넘어감 
