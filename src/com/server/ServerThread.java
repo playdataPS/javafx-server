@@ -67,10 +67,9 @@ public class ServerThread implements Runnable {
 					// userdata = new UserBiz().getLoginUser(userdata);
 					System.out.println("CONNECTED");
 					List<User> tmp = new ArrayList<User>();
-					
+
 					userList.add(userdata);
 					for (User data : userList) {
-						
 						tmp.add(data);
 //						System.out.println("userList"+data.getNickname());
 
@@ -83,7 +82,6 @@ public class ServerThread implements Runnable {
 					System.out.println("tmp size "+tmp.size());
 					broadCasting();
 					break;
-				
 				
 				case PLAYING:
 					System.out.println("게임 시작함");
@@ -183,6 +181,14 @@ public class ServerThread implements Runnable {
 						e.printStackTrace();
 					} // try~catch end
 					break;
+
+				case CHAT:
+					System.out.println("CHAT 상태");
+					userdata.setStatus(Status.CHAT);
+					boardChating();
+
+					break;
+
 				default:
 					System.out.println("error");
 					break;
@@ -238,7 +244,6 @@ public class ServerThread implements Runnable {
 		for (User data : userList) {
 			try {
 				data.getOos().writeObject(userdata);
-
 			} catch (IOException e) {
 				System.out.println("broadCasting() " + data.getOos() + " userdata " + userdata.getUserList());
 				e.printStackTrace();
@@ -247,4 +252,30 @@ public class ServerThread implements Runnable {
 		} // for end
 	}
 
+	public void boardChating() {
+
+		String nickName = userdata.getNickname();
+		String message = userdata.getMessage();
+		String Content = userdata.getNickname() + ":" + userdata.getMessage();
+
+		for (User data : userList) {
+			try {
+				data.getOos().writeObject(userList);
+				System.out.println("성공햇어요 !!!! nickName" + nickName + "||" + "message " + message);
+				System.out.println("모두에게 뿌립니다.");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+//		System.out.println("nickName" + nickName + "||" + "message " + message);
+		// 전체 회원에게 내용 출력
+	}
+
+			} catch (IOException e) {
+				System.out.println("broadCasting() " + data.getOos() + " userdata " + userdata.getUserList());
+				e.printStackTrace();
+			}
+
+		} // for end
+	}
 }
