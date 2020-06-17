@@ -4,6 +4,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
+import java.util.Queue;
 
 
 public class User implements Serializable {
@@ -24,20 +25,14 @@ public class User implements Serializable {
 	private MessageType type;
 	private Room gameRoom;
 	private List<User> userList;
-	private  Node pointer;
+	private Game gameData;
+	private Queue<Game> gameQue;
+	private GameStatus gameStatus;
 	
-	class Node{
-		double x,y;
-		public Node(double x, double y) {
-			this.x = x;
-			this.y = y;
-		}
-	}
-
-
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public User(String ip, String nickname, Status status, ObjectOutputStream oos) {
 		this.ip = ip;
@@ -78,14 +73,48 @@ public class User implements Serializable {
 		this(no, ip, nickname, score, regdate, status, null);
 	}
 	
-	public Node getPointer() {
-		return pointer;
-	}
 	
-	public void setPointer(Node pointer) {
-		this.pointer = pointer;
-	}
 	
+	public int getRoomNo() {
+		return roomNo;
+	}
+
+
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
+	}
+
+
+	public Game getGameData() {
+		return gameData;
+	}
+
+
+	public void setGameData(Game gameData) {
+		this.gameData = gameData;
+	}
+
+
+	public Queue<Game> getGameQue() {
+		return gameQue;
+	}
+
+
+	public void setGameQue(Queue<Game> gameQue) {
+		this.gameQue = gameQue;
+	}
+
+
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
+
+
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
+	}
+
+
 	public List<User> getUserList() {
 		return userList;
 	}
@@ -193,5 +222,7 @@ public class User implements Serializable {
 	public void setOos(ObjectOutputStream oos) {
 		this.oos = oos;
 	}
+
+	
 
 }
