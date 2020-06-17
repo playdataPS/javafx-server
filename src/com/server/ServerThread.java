@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -70,53 +71,18 @@ public class ServerThread implements Runnable {
 					userList.add(userdata);
 					for (User data : userList) {
 						tmp.add(data);
-						System.out.println("userList" + data.getNickname());
+//						System.out.println("userList"+data.getNickname());
 
 					} // for end
+					
 					userdata.setUserList(tmp);
+					userdata.setRoomStatus(RoomStatus.WAITING);
 					userdata.setStatus(Status.CONNECTED); // 방으로 넘어감
 					userdata.setOos(oos);
+					System.out.println("tmp size "+tmp.size());
 					broadCasting();
 					break;
-				case WAITING: // 방에 들어옴
-					System.out.println("WAITING");
-
-					userdata.setStatus(Status.WAITING);
-
-					broadCasting();
-					break;
-
-				case READY:
-					for (User u : userList) {
-						if (u.getNickname().equals(userdata.getNickname())) {
-							u.setStatus(Status.READY);
-							break;
-						}
-
-					}
-
-					for (User u : userList) {
-						if (u.getStatus().equals(Status.READY)) {
-							cnt++;
-						}
-
-					}
-
-					System.out.println("game count : " + cnt);
-					if (cnt > 1 && cnt == userList.size()) {
-						// 게임 시작
-						System.out.println("game start all");
-						userdata.setStatus(Status.PLAYING);
-						for (User u : userList) {
-							u.setStatus(Status.PLAYING);
-						} // for end
-
-					} else {
-						userdata.setStatus(Status.READY);
-					}
-					userdata.setUserList(userList);
-					broadCasting();
-					break;
+				
 				case PLAYING:
 					System.out.println("게임 시작함");
 					Queue<Game> que = createGameQue();
@@ -145,6 +111,55 @@ public class ServerThread implements Runnable {
 					broadCasting();
 
 					break;
+					
+				case ROBY:
+					RoomStatus roomstatus = userdata.getRoomStatus();
+					if(roomstatus==null)	roomstatus = RoomStatus.WAITING;
+					switch (roomstatus) {
+					case READY:
+						
+						for (User u : userList) {
+							if (u.getNickname().equals(userdata.getNickname())) {
+								u.setRoomStatus(RoomStatus.READY);
+							}
+							if (u.getRoomStatus().equals(RoomStatus.READY)) {
+								cnt++;
+							}
+
+						}//for end 
+
+
+						System.out.println("game count : " + cnt);
+						if (cnt > 1 && cnt == userList.size()) {
+							// 게임 시작
+							System.out.println("game start all");
+							userdata.setStatus(Status.PLAYING);
+							for (User u : userList) {
+								u.setStatus(Status.PLAYING);
+							} // for end
+
+						}// if end  
+						
+						
+						break;
+					
+						
+					case WAITING:
+						//userdata.setRoomStatus(RoomStatus.WAITING);
+
+						for (User u : userList) {
+							if (u.getNickname().equals(userdata.getNickname())) {
+								u.setRoomStatus(RoomStatus.WAITING);
+								break;
+							}
+						} // for end
+						break;
+					
+					}
+					
+					broadCasting();
+					break;
+					
 				case DISCONNECTED:
 					System.out.println("DISCONNECTED");
 					String name = userdata.getNickname();
@@ -229,7 +244,6 @@ public class ServerThread implements Runnable {
 		for (User data : userList) {
 			try {
 				data.getOos().writeObject(userdata);
-
 			} catch (IOException e) {
 				System.out.println("broadCasting() " + data.getOos() + " userdata " + userdata.getUserList());
 				e.printStackTrace();
@@ -255,5 +269,13 @@ public class ServerThread implements Runnable {
 		}
 //		System.out.println("nickName" + nickName + "||" + "message " + message);
 		// 전체 회원에게 내용 출력
+	}
+
+			} catch (IOException e) {
+				System.out.println("broadCasting() " + data.getOos() + " userdata " + userdata.getUserList());
+				e.printStackTrace();
+			}
+
+		} // for end
 	}
 }
