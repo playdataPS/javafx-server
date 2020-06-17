@@ -27,10 +27,12 @@ public class User implements Serializable {
 	private List<User> userList;
 	private Game gameData;
 	private Queue<Game> gameQue;
+	private GameStatus gameStatus;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public User(String ip, String nickname, Status status, ObjectOutputStream oos) {
 		this.ip = ip;
@@ -71,6 +73,48 @@ public class User implements Serializable {
 		this(no, ip, nickname, score, regdate, status, null);
 	}
 	
+	
+	
+	public int getRoomNo() {
+		return roomNo;
+	}
+
+
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
+	}
+
+
+	public Game getGameData() {
+		return gameData;
+	}
+
+
+	public void setGameData(Game gameData) {
+		this.gameData = gameData;
+	}
+
+
+	public Queue<Game> getGameQue() {
+		return gameQue;
+	}
+
+
+	public void setGameQue(Queue<Game> gameQue) {
+		this.gameQue = gameQue;
+	}
+
+
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
+
+
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
+	}
+
+
 	public List<User> getUserList() {
 		return userList;
 	}

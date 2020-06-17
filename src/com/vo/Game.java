@@ -1,6 +1,9 @@
 package com.vo;
 
 import java.sql.Date;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import javafx.scene.paint.Color;
@@ -8,24 +11,23 @@ import javafx.scene.paint.Color;
 public class Game {
 	private int no;
 	private int dictNo;
+	private String word;
 	private String img;
 	private Date regdate;
 	private Color color;
 	private Point point;
 	private User seeker;
 	private Queue<User> drowingUserQue;
-	private GameStatus status;
 	
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GameStatus getStatus() {
-		return status;
+	public String getWord() {
+		return word;
 	}
-	
-	public void setStatus(GameStatus status) {
-		this.status = status;
+	public void setWord(String word) {
+		this.word = word;
 	}
 	
 	public User getSeeker() {
@@ -33,6 +35,13 @@ public class Game {
 	}
 	public void setSeeker(User seeker) {
 		this.seeker = seeker;
+	}
+	
+	//그림 그릴 유저들만 랜덤으로 순서 부여 
+	public void mixDrowingUser(List<User> userList) {//drowing user
+		drowingUserQue = new LinkedList<User>();
+		Collections.shuffle(userList);		
+		this.drowingUserQue.addAll(userList);
 	}
 	
 	public Queue<User> getDrowingUserQue() {
